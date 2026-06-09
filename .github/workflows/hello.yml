@@ -7,10 +7,25 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-
     steps:
       - name: 인사 출력
         run: echo "Hello! GitHub Actions 작동 중입니다"
-
       - name: 현재 날짜 출력
         run: date
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: Python 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: pytest 설치
+        run: pip install pytest
+
+      - name: 테스트 실행
+        run: pytest test_calculator.py -v
